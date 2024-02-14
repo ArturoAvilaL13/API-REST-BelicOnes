@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.sql.Blob;
+import java.sql.Clob;
 
 @Data
 @AllArgsConstructor

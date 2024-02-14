@@ -1,10 +1,14 @@
 package com.belicones.APIRest.builder;
 
 import com.belicones.APIRest.model.dto.CarneDto;
+import com.belicones.APIRest.model.dto.PedidoDto;
 import com.belicones.APIRest.model.dto.UsuarioDto;
+import com.belicones.APIRest.model.dto.VideoCarneDto;
 import com.belicones.APIRest.model.dto.tipos.carne.TipoDeCarneDto;
 import com.belicones.APIRest.model.entity.Carne;
+import com.belicones.APIRest.model.entity.Pedido;
 import com.belicones.APIRest.model.entity.Usuario;
+import com.belicones.APIRest.model.entity.VideoCarne;
 import com.belicones.APIRest.model.entity.tipos.carne.TipoDeCarne;
 
 public class Builders {
@@ -67,5 +71,44 @@ public class Builders {
                 .tipoDeCorte(tipoDeCarne.getTipoDeCorte())
                 .build();
     }
+
+    public Pedido builderPedido(PedidoDto pedidoDto){
+        return Pedido.builder()
+                .idPedido(pedidoDto.getIdPedido())
+                .totalPedido(pedidoDto.getTotalPedido())
+                .fkIdMetodoDePago(pedidoDto.getFkIdMetodoDePago())
+                .fkIdTipoDeEnvio(pedidoDto.getFkIdTipoDeEnvio())
+                .fkIdUsuario(pedidoDto.getFkIdUsuario())
+                .build();
+    }
+
+    public PedidoDto builderPedido(Pedido pedido){
+        return PedidoDto.builder()
+                .idPedido(pedido.getIdPedido())
+                .totalPedido(pedido.getTotalPedido())
+                .fkIdMetodoDePago(pedido.getFkIdMetodoDePago())
+                .fkIdTipoDeEnvio(pedido.getFkIdTipoDeEnvio())
+                .fkIdUsuario(pedido.getFkIdUsuario())
+                .build();
+    }
+
+    public VideoCarne builderVideoCarne(VideoCarneDto videoCarneDto){
+        return VideoCarne.builder()
+                .idVideoCarne(videoCarneDto.getIdVideoCarne())
+                .urlVideoCarne(videoCarneDto.getUrlVideoCarne())
+                .descripcionVideoCarne(videoCarneDto.getDescripcionVideoCarne())
+                .fkIdCarne(videoCarneDto.getFkIdCarne())
+                .build();
+    }
+
+    public VideoCarneDto builderVideoCarne(VideoCarne videoCarne){
+        return VideoCarneDto.builder()
+                .idVideoCarne(videoCarne.getIdVideoCarne())
+                .urlVideoCarne(videoCarne.getUrlVideoCarne())
+                .descripcionVideoCarne(videoCarne.getDescripcionVideoCarne())
+                .fkIdCarne(videoCarne.getFkIdCarne())
+                .build();
+    }
+
 
 }

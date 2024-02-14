@@ -18,7 +18,11 @@ public class CarneImplementsService implements InterfaceCarneService{
     @Transactional
     @Override
     public List<Carne> listAll() {
-        return (List) carneDao.findAll();
+        List<Carne> carnes = (List<Carne>) carneDao.findAll();
+        if (carnes.isEmpty()){
+            return null;
+        }
+        return carnes;
     }
     @Transactional
     @Override

@@ -68,7 +68,7 @@ public class CarneController {
                             .mensaje("La carne que busca no existe")
                             .object(null)
                             .build()
-                    ,HttpStatus.NOT_FOUND);
+                    ,HttpStatus.OK);
         }
         return new ResponseEntity<>(
                 MessageResponse.builder()
@@ -82,13 +82,13 @@ public class CarneController {
     @GetMapping("carne/tipo/{id:\\d+}")
     public ResponseEntity<?> showCarnesByTipo(@PathVariable Integer id){
         List<Carne> carnes = carneService.findByTipo(id);
-        if(carnes.isEmpty()){
+        if(carnes == null){
             return new ResponseEntity<>(
                     MessageResponse.builder()
-                            .mensaje("No hay cartes en esa categoria")
+                            .mensaje("No hay carnes en esa categoria")
                             .object(null)
                             .build()
-                    ,HttpStatus.NOT_FOUND);
+                    ,HttpStatus.OK);
         }
         return new ResponseEntity<>(
                 MessageResponse.builder()
@@ -119,7 +119,7 @@ public class CarneController {
                                 .mensaje("La carne que buscas no existe")
                                 .object(null)
                                 .build()
-                        ,HttpStatus.NOT_FOUND
+                        ,HttpStatus.OK
                 );
             }
         }catch(DataAccessException dataAcEx){

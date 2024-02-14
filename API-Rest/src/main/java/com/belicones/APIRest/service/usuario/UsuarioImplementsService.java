@@ -17,7 +17,11 @@ public class UsuarioImplementsService implements InterfaceUsuarioService{
     private UsuarioDao usuarioDao;
     @Override
     public List<Usuario> listAll() {
-        return (List) usuarioDao.findAll();
+        List<Usuario> usuarios = (List<Usuario>) usuarioDao.findAll();
+        if(usuarios.isEmpty()){
+            return null;
+        }
+        return usuarios;
     }
     @Transactional
     @Override

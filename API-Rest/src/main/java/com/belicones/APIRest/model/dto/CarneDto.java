@@ -5,6 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 
+import java.sql.Blob;
+import java.sql.Clob;
+
+
 @Data
 @ToString
 @Builder
