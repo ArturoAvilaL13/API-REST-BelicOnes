@@ -59,7 +59,7 @@ public class VideoCarneController {
                 , HttpStatus.OK);
     }
 
-    @GetMapping("video/{1}")
+    @GetMapping("video/{id}")
     public ResponseEntity<?> findVideoById(@PathVariable Integer id){
         VideoCarne videoCarne = videoCarneService.findById(id);
         if(videoCarne==null){
