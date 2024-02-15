@@ -20,4 +20,6 @@ public class PedidoTieneCarne implements Serializable {
     @Id//*Anotacion extra para cuando no se tiene un id definido en la tabla
     @Column(name = "fk_id_carne")
     private int fkIdCarne;
+    @Column(name = "cantidad_carne")
+    private int cantidadCarne;
 }

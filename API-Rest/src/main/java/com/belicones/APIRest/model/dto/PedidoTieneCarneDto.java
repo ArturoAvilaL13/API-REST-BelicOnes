@@ -11,4 +11,5 @@ import lombok.ToString;
 public class PedidoTieneCarneDto {
     private int fkIdPedido;
     private int fkIdCarne;
+    private int cantidadCarne;
 }

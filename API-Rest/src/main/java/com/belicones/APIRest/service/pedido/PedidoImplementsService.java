@@ -42,6 +42,9 @@ public class PedidoImplementsService implements  InterfacePedido{
                 pedidosUsuario.add(pedido);
             }
         }
+        if (pedidosUsuario.isEmpty()){
+            return null;
+        }
         return pedidosUsuario;
     }
     @Transactional

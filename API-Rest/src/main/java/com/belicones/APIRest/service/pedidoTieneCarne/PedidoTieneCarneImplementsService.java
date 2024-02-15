@@ -1,6 +1,8 @@
 package com.belicones.APIRest.service.pedidoTieneCarne;
 
+import com.belicones.APIRest.builder.Builders;
 import com.belicones.APIRest.model.dao.PedidoTieneCarneDao;
+import com.belicones.APIRest.model.dto.PedidoTieneCarneDto;
 import com.belicones.APIRest.model.entity.PedidoTieneCarne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +41,12 @@ public class PedidoTieneCarneImplementsService implements InterfacePedidoTieneCa
             return null;
         }
         return pedidosUsuario;
+    }
+
+    @Transactional
+    @Override
+    public PedidoTieneCarne save(PedidoTieneCarneDto pedidoTieneCarneDto) {
+        PedidoTieneCarne pedido = new Builders().builderPedidoCarne(pedidoTieneCarneDto);
+        return pedidoTieneCarneDao.save(pedido);
     }
 }

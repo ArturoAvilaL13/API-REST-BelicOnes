@@ -110,15 +110,19 @@ public class PedidoController {
     public ResponseEntity<?> deletePedido(@PathVariable Integer id){
         try{
             Pedido pedidoDelete = pedidoService.findById(id);
-            pedidoService.delete((pedidoDelete));
-            return new ResponseEntity<>(pedidoDelete,HttpStatus.NO_CONTENT);
+            pedidoService.delete(pedidoDelete);
+            return new ResponseEntity<>(
+                    MessageResponse.builder()
+                            .mensaje("Pedido eliminado correctamente")
+                            .object(null)
+                    .build(),HttpStatus.OK);
         }catch (DataAccessException dataAcEx){
             return new ResponseEntity<>(
                     MessageResponse.builder()
-                            .mensaje(dataAcEx.getMessage())
+                            .mensaje("No existen pedidos con ese Id, "+dataAcEx.getMessage())
                             .object(null)
                             .build()
-                    ,HttpStatus.METHOD_NOT_ALLOWED
+                    ,HttpStatus.OK
             );
         }
     }

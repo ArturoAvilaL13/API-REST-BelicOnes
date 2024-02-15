@@ -29,6 +29,7 @@ public class VideoCarneController {
                     MessageResponse.builder()
                             .mensaje("Video guardado con exito")
                             .object(new Builders().builderVideoCarne(videoCarne))
+                            .build()
                     ,HttpStatus.CREATED
             );
         }catch (DataAccessException dataAcEx){
@@ -82,7 +83,11 @@ public class VideoCarneController {
         try{
             VideoCarne videoCarne = videoCarneService.findById(id);
             videoCarneService.delete(videoCarne);
-            return  new ResponseEntity<>(videoCarne,HttpStatus.OK);
+            return  new ResponseEntity<>(
+                    MessageResponse.builder()
+                            .mensaje("Video eliminado correctamente")
+                            .object(videoCarne)
+                            .build(),HttpStatus.OK);
         }catch (DataAccessException dataAcEx){
             return new ResponseEntity<>(
                     MessageResponse.builder()

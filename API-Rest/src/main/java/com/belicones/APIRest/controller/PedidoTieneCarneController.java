@@ -1,18 +1,18 @@
 package com.belicones.APIRest.controller;
 
 import com.belicones.APIRest.builder.Builders;
+import com.belicones.APIRest.model.dto.PedidoTieneCarneDto;
 import com.belicones.APIRest.model.entity.Pedido;
 import com.belicones.APIRest.model.entity.PedidoTieneCarne;
 import com.belicones.APIRest.payload.MessageResponse;
 import com.belicones.APIRest.service.pedidoTieneCarne.PedidoTieneCarneImplementsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,7 +30,7 @@ public class PedidoTieneCarneController {
                             .mensaje("No hay pedidos de carnes")
                             .object(null)
                             .build()
-                    , HttpStatus.NOT_FOUND
+                    , HttpStatus.OK
             );
         }
         return new ResponseEntity<>(
@@ -51,7 +51,7 @@ public class PedidoTieneCarneController {
                             .mensaje("No hay pedidos de carnes con ese Id")
                             .object(null)
                             .build()
-                    ,HttpStatus.NOT_FOUND
+                    ,HttpStatus.OK
             );
         }
         return new ResponseEntity<>(
@@ -61,6 +61,28 @@ public class PedidoTieneCarneController {
                         .build()
                 ,HttpStatus.OK
         );
+    }
+
+    @PostMapping("pedidoCarne")
+    public ResponseEntity<?> savePedidoCarne(@RequestBody List<PedidoTieneCarneDto> pedidoTieneCarneDtos){
+        try{
+            List<PedidoTieneCarne> pedido = new ArrayList<>();
+            for(PedidoTieneCarneDto pedidoDto:pedidoTieneCarneDtos){
+                pedido.add(pedidoService.save(pedidoDto)) ;
+            }
+            return new ResponseEntity<>(MessageResponse.builder()
+                    .mensaje("Pedido completo guardado")
+                    .object(pedido)
+                    .build()
+                    , HttpStatus.CREATED);
+        }catch (DataAccessException excDt){
+            return new ResponseEntity<>(MessageResponse
+                    .builder()
+                    .mensaje(excDt.getMessage())
+                    .object(null)
+                    .build()
+                    ,HttpStatus.METHOD_NOT_ALLOWED);
+        }
     }
 
 }
